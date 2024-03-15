@@ -259,7 +259,7 @@
       function displayTiresSold() {
         let tiresSoldDiv = document.getElementById("tiresSold");
         tiresSoldDiv.innerHTML = "";
-      
+
         tiresSold.forEach((tire) => {
           let div = document.createElement("div");
           div.textContent = `${tire.quantity} ${tire.brand} ${tire.size} tires sold`;
@@ -291,4 +291,3 @@
     </script>
   </body>
 </html>
-
