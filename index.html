@@ -86,6 +86,10 @@
       <label for="sellRimDiameter">Rim Diameter:</label>
       <input type="number" id="sellRimDiameter" />
     </div>
+    <div class="input-container">
+      <label for="sellNotes">Notes:</label>
+      <input type="text" id="sellNotes" />
+    </div>
     <button onclick="sellTires()">Sell Tires</button>
 
     <h2>Current Inventory</h2>
@@ -179,6 +183,7 @@
         let rimDiameter = parseInt(
           document.getElementById("sellRimDiameter").value
         );
+        let sellNotes = document.getElementById("sellNotes").value.trim(); // Parse as string, not integer
 
         if (
           brand &&
@@ -213,7 +218,7 @@
               );
 
               // Record sold tires
-              let soldTires = { brand, quantity, size }; // Save tire details before removing it
+              let soldTires = { brand, quantity, size, sellNotes }; // Save tire details before removing it
               tiresSold.push(soldTires);
               localStorage.setItem("tiresSold", JSON.stringify(tiresSold));
 
@@ -254,14 +259,17 @@
       function displayTiresSold() {
         let tiresSoldDiv = document.getElementById("tiresSold");
         tiresSoldDiv.innerHTML = "";
-
+      
         tiresSold.forEach((tire) => {
           let div = document.createElement("div");
           div.textContent = `${tire.quantity} ${tire.brand} ${tire.size} tires sold`;
+          if (tire.sellNotes) {
+            div.textContent += `, Notes: ${tire.sellNotes}`; // Include notes if they exist
+          }
           tiresSoldDiv.appendChild(div);
         });
       }
-   
+
       // Function to clear input fields
       function clearInputs() {
         document.getElementById("brand").value = "";
@@ -274,6 +282,7 @@
         document.getElementById("sellWidth").value = "";
         document.getElementById("sellAspectRatio").value = "";
         document.getElementById("sellRimDiameter").value = "";
+        document.getElementById("sellNotes").value = ""; // Clear sellNotes input field
       }
 
       // Display initial inventory and sold tires
@@ -282,3 +291,4 @@
     </script>
   </body>
 </html>
+
